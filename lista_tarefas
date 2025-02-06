@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Título</title>
+    <link rel="stylesheet" href="styles.css"> <!-- Link to external CSS file -->
+    <style>
+        #button3 {
+            margin-left: 10px; /* Adjust the space between the button and the text */
+        }
+    </style>
+    
+</head>
+<body>
+    <br>
+    Lista de Tarefas
+    <br>
+    <br>
+    <input name="tarefa" placeholder="Adicione nova tarefa" />  <button type="button"  id="button3">Adicionar</button>
+    <br>
+    <br>
+    <div>   Texto a ser pego               <button type="reset"  name="excluir"> Excluir </button></div>
+    <hr>
+    <br>
+</body>
+</html>
