@@ -1,27 +1,88 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Título</title>
-    <link rel="stylesheet" href="styles.css"> <!-- Link to external CSS file -->
-    <style>
-        #button3 {
-            margin-left: 10px; /* Adjust the space between the button and the text */
-        }
-    </style>
-    
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Título</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    /* Centraliza o conteúdo da página */
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    /* Estilo do botão "Adicionar" */
+    #button3 {
+      margin-left: 10px;
+    }
+
+    /* Estilo para cada tarefa usando a abordagem 2 (com margin-left: auto) */
+    .tarefa {
+      display: flex;
+      align-items: center;
+      margin-bottom: 5px;
+      border: 1px solid #ccc; /* opcional para visualização */
+      padding: 5px;           /* opcional */
+    }
+    .tarefa p {
+      margin: 0;
+    }
+    .btn-excluir {
+      margin-left: auto;
+    }
+  </style>
 </head>
 <body>
-    <br>
-    Lista de Tarefas
-    <br>
-    <br>
-    <input name="tarefa" placeholder="Adicione nova tarefa" />  <button type="button"  id="button3">Adicionar</button>
-    <br>
-    <br>
-    <div>   Texto a ser pego               <button type="reset"  name="excluir"> Excluir </button></div>
-    <hr>
-    <br>
+  <br>
+  Lista de Tarefas
+  <br><br>
+  <input name="tarefa" placeholder="Adicione nova tarefa" id="input-tarefa" />
+  <button type="button" id="button3">Adicionar</button>
+  <br><br>
+  
+  <div id="tarefas-container">
+    <!-- As tarefas adicionadas aparecerão aqui -->
+  </div>
+  <hr>
+  <br>
+  
+  <script>
+    const buttonAdicionar = document.getElementById('button3');
+    const inputTarefa = document.getElementById('input-tarefa');
+    const containerTarefas = document.getElementById('tarefas-container');
+
+    buttonAdicionar.addEventListener('click', () => {
+      const novaTarefa = inputTarefa.value.trim();
+      
+      if (novaTarefa !== '') {
+        const tarefaDiv = document.createElement('div');
+        tarefaDiv.className = 'tarefa';
+        
+        const tarefaTexto = document.createElement('p');
+        tarefaTexto.textContent = novaTarefa;
+        
+        const botaoExcluir = document.createElement('button');
+        botaoExcluir.type = 'button';
+        botaoExcluir.textContent = 'Excluir';
+        botaoExcluir.className = 'btn-excluir';
+        
+        botaoExcluir.addEventListener('click', () => {
+          containerTarefas.removeChild(tarefaDiv);
+        });
+        
+        tarefaDiv.appendChild(tarefaTexto);
+        tarefaDiv.appendChild(botaoExcluir);
+        containerTarefas.appendChild(tarefaDiv);
+        
+        inputTarefa.value = '';
+      }
+    });
+  </script>
 </body>
 </html>
+
