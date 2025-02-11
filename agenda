@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Agenda de clientes</title>
+  <!-- Caso tenha um arquivo externo, mantenha o link abaixo -->
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background-color: #f0f0f0;
+      margin: 0;
+      padding: 0;
+    }
+    .todo-container {
+      max-width: 600px;
+      margin: 20px auto;
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 5px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    }
+    h1 {
+      font-size: 24px;
+      margin-bottom: 10px;
+    }
+    form input[type='text'] {
+      width: 100%;
+      padding: 10px;
+      margin: 5px 0 15px;
+      border: 1px solid #ccc;
+      border-radius: 3px;
+    }
+    form button {
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      border-radius: 3px;
+      padding: 10px 20px;
+      cursor: pointer;
+    }
+    form button:hover {
+      background-color: #0056b3;
+    }
+    /* Contêiner que agrupa os clientes */
+    #clientes-container {
+      margin-top: 20px;
+    }
+    /* Cada cliente será exibido em uma linha com 4 colunas:
+       nome, telefone, endereço e botão de exclusão */
+    .cliente {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr auto;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 0;
+      border-bottom: 1px solid #ccc;
+    }
+    /* Opcional: centralizar ou alinhar os textos */
+    .cliente span {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    .delete-button {
+      background-color: #ff5c5c;
+      color: #fff;
+      border: none;
+      border-radius: 3px;
+      padding: 4px 8px;
+      cursor: pointer;
+    }
+    .delete-button:hover {
+      background-color: #d13232;
+    }
+  </style>
+</head>
+<body>
+  <div class="todo-container">
+    <h1>Agenda de Clientes</h1>
+  
+  <form id="form-client">
+    <br>
+    <label for="name">Nome:</label>
+    <br>
+    <input id="name" name="name" type="text" placeholder="Digite o nome"
+    required>
+    <br>
+    <br>
+    <label for="telefone">Telefone:</label>
+    <br>
+    <br>
+    <input id="telefone" name="fone" type="text" placeholder="Digite o telefone"
+    required>
+    <br>
+    <br>
+    <label for="street">Endereço:</label>
+    <br>
+    <br>
+    <input id="street" name="street" type="text" placeholder="Digite o endereço"
+        required>
+        <br>
+    <br>
+    <br>
+        <button type="submit">Adicionar</button>
+      </form> 
+    
+    <!-- 
+    <button type="submit">Submit</button>
+    <br>
+    <button type="reset">Clear</button>
+    <br>-->
+
+    
+ 
+  <div id="clientes-container"></div>
+
+</div>
+    <script>
+    
+      const form = document.getElementById('form-client');
+      //const inputnome = document.getElementById('input-nome');
+      const containerClientes = document.getElementById('clientes-container');
+      
+      //Container é o vetor de nomes
+
+    form.addEventListener('submit', function(event) {
+      event.preventDefault();//impede comportamento padrão do form
+      
+      const nomeInput = document.getElementById('name');
+      const foneInput = document.getElementById('telefone');
+      const streetInput = document.getElementById('street');
+      const novoNome = nomeInput.value.trim();
+      const novofone = foneInput.value.trim();
+      const novostreet = streetInput.value.trim();
+
+
+      if (novoNome !== '' &&  novofone !== '' &&  novostreet !== '') {//se a nova string for diferente de null:
+        const clienteDiv = document.createElement('div');//local da tela onde aparece
+        clienteDiv.className = 'cliente';
+ 
+        const nomeTexto = document.createElement('span');//cria o parágrafo
+        const foneTexto = document.createElement('span');//cria o parágrafo
+        const streetTexto = document.createElement('span');//cria o parágrafo
+
+        // para sair alinhado precisa ser span
+        nomeTexto.textContent = novoNome;//criou o parágrafo com a string novoNome
+        // para sair alinhado precisa ser span
+        foneTexto.textContent = novofone;//criou o parágrafo com a string novoNome
+
+        streetTexto.textContent = novostreet;//criou o parágrafo com a string novoNome
+        
+        const botaoExcluir = document.createElement('button');
+        botaoExcluir.type = 'button';
+        botaoExcluir.textContent = 'Excluir';
+        botaoExcluir.className = 'delete-button';
+        
+        botaoExcluir.addEventListener('click', () => {
+          containerClientes.removeChild(clienteDiv);
+          // remove o que está na tela, ao lado dele
+        });
+        //são dois vetores: nomeDiv (elementos que aparecem na tela)
+        //e containerNomes: contém todos os nomeDiv
+         
+        clienteDiv.appendChild(nomeTexto); 
+
+        clienteDiv.appendChild(foneTexto); 
+
+        clienteDiv.appendChild(streetTexto); 
+        //pai.appendChild(filho) filho é inserido como 
+        // o último elemento dentro de pai. 
+        
+        clienteDiv.appendChild(botaoExcluir);
+        containerClientes.appendChild(clienteDiv);
+        
+
+        
+        
+        nomeInput.value = '';
+        foneInput.value = '';
+        streetInput.value = '';
+      }
+    });
+      </script>
+
+</body>
+</html>
