@@ -18,6 +18,13 @@ a{
   text-decoration: none;
 
 }
+#root{
+  height: 100svh;
+  display: flex;
+  flex-direction: column;
+}
+
+
 
 /* Header */
 
@@ -34,5 +41,10 @@ align-items: center;
 }
 
 .main{
-  
+  padding: 20px;
+  margin: 0px 10px 10px;
+  border-radius: 15px;
+  flex: 1;
+  background-image: linear-gradient(to bottom, #062d14, black);
 }
+
